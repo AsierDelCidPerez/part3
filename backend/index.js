@@ -1,5 +1,6 @@
 const express = require('express')
 const app = express()
+const morgan = require('morgan')
 
 let notes = [
     {    
@@ -23,6 +24,9 @@ let notes = [
 ]
 
 app.use(express.json())
+
+app.use(morgan('dev'))
+
 
 app.post('/api/notes', (request, response) => {
     const maxId = notes.length > 0 ? Math.max(...notes.map(n => n.id)) : 0
