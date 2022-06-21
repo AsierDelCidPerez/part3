@@ -25,7 +25,7 @@ let notes = [
 
 app.use(express.json())
 
-app.use(morgan('dev'))
+app.use(morgan(':path'))
 
 
 app.post('/api/notes', (request, response) => {
