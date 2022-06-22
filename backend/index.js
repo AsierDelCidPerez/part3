@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const morgan = require('morgan')
+const cors = require('cors')
 
 let notes = [
     {    
@@ -24,9 +24,7 @@ let notes = [
 ]
 
 app.use(express.json())
-
-app.use(morgan('dev'))
-
+app.use(cors())
 
 app.post('/api/notes', (request, response) => {
     const maxId = notes.length > 0 ? Math.max(...notes.map(n => n.id)) : 0
