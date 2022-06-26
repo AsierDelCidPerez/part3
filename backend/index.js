@@ -8,6 +8,7 @@ let notes = []
 
 app.use(express.json())
 app.use(cors()) // Permite conexiones cruzadas, es decir de diferentes dominios
+
 app.use(express.static('build'))
 
 const errorHandler = (error, req, res, next) => {
@@ -37,6 +38,10 @@ app.put('/api/notes/:id', (request, response, next) => {
         .catch(err => next(err))
 })
 
+app.get('/', (req, res) => {
+    res.send("<h1>Hola mundo</h1>")
+})
+
 app.post('/api/notes', (request, response) => {
     const body = request.body
     if(!body.content) return response.status(400).json({error: 'Content missing'})
@@ -59,10 +64,6 @@ app.get('/api/notes/:id', (request, response, next) => {
     Note.findById(request.params.id).then(res => {
         response.json(res)
     }).catch(err => next(err))
-})
-
-app.get('/', (request, response) => {
-    response.send('<h1>Hello world!</h1>')
 })
 
 app.delete('/api/notes/:id', (request, response) => {
